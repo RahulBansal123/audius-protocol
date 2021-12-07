@@ -1,5 +1,7 @@
 require "resty.core"
 
+local cjson_safe = require "cjson.safe"
+
 local limit_count = require "resty.limit.count"
 local resty_http = require "resty.http"
 local resty_random = require "resty.random"
@@ -12,6 +14,39 @@ local utils = require "utils"
 math.randomseed(string.byte(resty_random.bytes(1)))
 
 local _M = {}
+
+local redirect_target_weights = {}
+for index, redirect_target in ipairs(config.redirect_targets) do
+    redirect_target_weights[redirect_target] = 1
+end
+
+function update_redirect_target_weights (premature)
+    if premature then
+        return
+    end
+
+    local httpc = resty_http.new()
+    for index, redirect_target in ipairs(config.redirect_targets) do
+        local res, err = httpc:request_uri(redirect_target .. "/health_check", { method = "GET" })
+        if not res then
+            ngx.log(ngx.ERR, "failed to make request to discovery provider: ", redirect_target, err)
+            redirect_target_weights[redirect_target] = 0
+        else
+            parsed, err = cjson_safe.decode(res.body)
+            if not parsed then
+                ngx.log(ngx.ERR, "failed to decode request from discovery provider: ", redirect_target, err)
+                redirect_target_weights[redirect_target] = 0
+            else
+                redirect_target_weights[redirect_target] = parsed["latest_indexed_block"]
+            end
+        end
+    end
+    httpc:close()
+end
+
+function _M.start_update_redirect_target_weights_timer ()
+    ngx.timer.every(300, update_redirect_target_weights)
+end
 
 function get_cached_public_key (discovery_provider)
     local public_key = ngx.shared.rsa_public_key_store:get(discovery_provider)
@@ -29,6 +64,22 @@ function get_cached_public_key (discovery_provider)
 end
 
 function get_redirect_target ()
+    local total = 0
+    for index, redirect_target in ipairs(config.redirect_targets) do
+        total = total + redirect_target_weights[redirect_target]
+    end
+
+    local rand = math.random(1, total)
+
+    local current = 0
+    for index, redirect_target in ipairs(config.redirect_targets) do
+        current = current + redirect_target_weights[redirect_target]
+        if rand <= current then
+            return redirect_target
+        end
+    end
+
+    -- choose randomly if all nodes have weight 0
     return config.redirect_targets[math.random(1, #config.redirect_targets)]
 end
 
