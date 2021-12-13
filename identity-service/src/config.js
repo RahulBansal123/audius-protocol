@@ -616,7 +616,7 @@ const config = convict({
     doc: 'Whitelisted discovery providers to select from (comma-separated)',
     format: String,
     env: 'discoveryProviderWhitelist',
-    default: ''
+    default: 'https://discoveryprovider.audius.co'
   },
   clusterForkProcessCount: {
     doc: 'The number of express server processes to initialize in the this app "cluster"',
