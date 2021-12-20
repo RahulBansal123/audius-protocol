@@ -66,6 +66,7 @@ listen_counts = "listen_counts"
 tracks = "tracks"
 albums = "albums"
 playlists = "playlists"
+user = "user"
 
 # notifications metadata
 notification_type = "type"
@@ -116,3 +117,4 @@ solana_notification_threshold = "threshold"
 
 # Trending
 owner_follower_count = "owner_follower_count"
+

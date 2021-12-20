@@ -1296,8 +1296,9 @@ def add_users_to_tracks(session, tracks, current_user_id=None):
     """
     user_ids = get_users_ids(tracks)
     users = []
-    if tracks and len(tracks) > 0 and tracks[0].get("user"):
-        users = list(map(lambda t: t["user"][0], tracks))
+    prev_tracks = list(tracks)
+    if tracks and len(tracks) > 0 and tracks[0].get(response_name_constants.user):
+        users = list(map(lambda t: t[response_name_constants.user][0], tracks))
     else:
         # This shouldn't happen - all tracks should come preloaded with their owners per the relationship
         users = get_unpopulated_users(session, user_ids)
@@ -1307,9 +1308,9 @@ def add_users_to_tracks(session, tracks, current_user_id=None):
     populated_users = populate_user_metadata(session, user_ids, users, current_user_id)
     user_map = {}
     for user in populated_users:
-        user_map[user["user_id"]] = user
+        user_map[user[response_name_constants.user_id]] = user
 
     for track in tracks:
-        user = user_map[track["owner_id"]]
+        user = user_map[track[response_name_constants.owner_id]]
         if user:
-            track["user"] = user
+            track[response_name_constants.user] = user

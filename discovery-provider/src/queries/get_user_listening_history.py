@@ -15,7 +15,6 @@ class GetUserListeningHistory(TypedDict):
     current_user_id: int
     limit: int
     offset: int
-    filter_deleted: bool
     with_users: bool
 
 def get_user_listening_history(args: GetUserListeningHistory):
@@ -23,15 +22,10 @@ def get_user_listening_history(args: GetUserListeningHistory):
     with db.scoped_session() as session:
         return _get_user_listening_history(session, args)
 
-
-def add_query_pagination(listening_history, limit, offset):
-    return
-
 def _get_user_listening_history(session: Session, args: GetUserListeningHistory):
     current_user_id = args.get("current_user_id")
     limit = args.get("limit")
     offset = args.get("offset")
-    filter_deleted = args.get("filter_deleted")
 
     listening_history_results = (
         session.query(UserListeningHistory.listening_history)
@@ -40,10 +34,12 @@ def _get_user_listening_history(session: Session, args: GetUserListeningHistory)
         )
     ).scalar()
 
-    # query_result = add_query_pagination(listening_history_results, limit, offset).all()
 
     if not listening_history_results:
         return []
+
+    # add query pagination
+    listening_history_results = listening_history_results[offset:offset+limit]
 
     track_ids = []
     listen_dates = []
@@ -51,15 +47,21 @@ def _get_user_listening_history(session: Session, args: GetUserListeningHistory)
         track_ids.append(listen["track_id"])
         listen_dates.append(listen["timestamp"])
 
-    tracks_results = (
+    track_results = (
         session.query(Track)
         .filter(
             Track.track_id.in_(track_ids)
         )
     ).all()
 
+    # sort tracks in listening history order
+    track_results_dict = {track_result.track_id: track_result for track_result in track_results}
+    sorted_track_results = [track_results_dict[track_id] for track_id in track_ids]
+
+    tracks = helpers.query_result_to_list(sorted_track_results)
+
     # bundle peripheral info into track results
-    tracks = populate_track_metadata(session, track_ids, tracks_results, current_user_id)
+    tracks = populate_track_metadata(session, track_ids, tracks, current_user_id)
 
     if args.get("with_users", False):
         add_users_to_tracks(session, tracks, current_user_id)
