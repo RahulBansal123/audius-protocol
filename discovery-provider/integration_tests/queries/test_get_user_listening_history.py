@@ -1,4 +1,5 @@
-from src.queries.get_track_history import _get_track_history
+from src.queries.get_user_listening_history import _get_user_listening_history
+from src.tasks.user_listening_history.index_user_listening_history import _index_user_listening_history
 from src.utils.db_session import get_db
 from integration_tests.utils import populate_mock_db
 
@@ -34,7 +35,9 @@ def test_get_track_history_for_user_multiple_plays(app):
     populate_mock_db(db, test_entities)
 
     with db.scoped_session() as session:
-        track_history = _get_track_history(
+        _index_user_listening_history(session)
+
+        track_history = _get_user_listening_history(
             session,
             {
                 "current_user_id": 1,
@@ -59,7 +62,9 @@ def test_get_track_history_for_user_no_plays(app):
     populate_mock_db(db, test_entities)
 
     with db.scoped_session() as session:
-        track_history = _get_track_history(
+        _index_user_listening_history(session)
+
+        track_history = get_user_listening_history(
             session,
             {
                 "current_user_id": 3,
@@ -81,7 +86,7 @@ def test_get_track_history_for_single_play(app):
     populate_mock_db(db, test_entities)
 
     with db.scoped_session() as session:
-        track_history = _get_track_history(
+        track_history = get_user_listening_history(
             session,
             {
                 "current_user_id": 2,
@@ -105,7 +110,7 @@ def test_get_track_history_for_limit_bound(app):
     populate_mock_db(db, test_entities)
 
     with db.scoped_session() as session:
-        track_history = _get_track_history(
+        track_history = get_user_listening_history(
             session,
             {
                 "current_user_id": 1,

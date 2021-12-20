@@ -22,7 +22,7 @@ from src.queries.get_users import get_users
 from src.queries.search_queries import SearchKind, search
 from src.queries.get_tracks import get_tracks
 from src.queries.get_save_tracks import get_save_tracks
-from src.queries.get_track_history import get_track_history
+from src.queries.get_user_listening_history import get_user_listening_history
 from src.queries.get_followees_for_user import get_followees_for_user
 from src.queries.get_followers_for_user import get_followers_for_user
 from src.queries.get_top_user_track_tags import get_top_user_track_tags
@@ -538,7 +538,7 @@ class TrackHistoryFull(Resource):
             "offset": offset,
             "with_users": True,
         }
-        track_history = get_track_history(get_tracks_args)
+        track_history = get_user_listening_history(get_tracks_args)
         tracks = list(map(extend_activity, track_history))
         return success_response(tracks)
 
