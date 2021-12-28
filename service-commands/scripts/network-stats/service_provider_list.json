@@ -1,0 +1,282 @@
+[
+  {
+      "owner": "0xc1f351FE81dFAcB3541e59177AC71Ed237BD15D0",
+      "endpoint": "https://audius-metadata-1.figment.io",
+      "spID": 2,
+      "type": "discovery-node",
+      "blockNumber": 11289136,
+      "delegateOwnerWallet": "0x7db3789e5E2154569e802945ECF2cC92e0994841"
+  },
+  {
+      "owner": "0x8C860adb28CA8A33dB5571536BFCF7D6522181e5",
+      "endpoint": "https://discoveryprovider.audius.prod-us-west-2.staked.cloud",
+      "spID": 3,
+      "type": "discovery-node",
+      "blockNumber": 11388648,
+      "delegateOwnerWallet": "0xCbc560F94aC3218272e825A428baDEFd4c39CC19"
+  },
+  {
+      "owner": "0x8C860adb28CA8A33dB5571536BFCF7D6522181e5",
+      "endpoint": "https://discoveryprovider.audius1.prod-us-west-2.staked.cloud",
+      "spID": 4,
+      "type": "discovery-node",
+      "blockNumber": 11472664,
+      "delegateOwnerWallet": "0x06ADc7ED2CC96735D3ecACc573F632aa2F65C268"
+  },
+  {
+      "owner": "0x8C860adb28CA8A33dB5571536BFCF7D6522181e5",
+      "endpoint": "https://discoveryprovider.audius2.prod-us-west-2.staked.cloud",
+      "spID": 5,
+      "type": "discovery-node",
+      "blockNumber": 11472677,
+      "delegateOwnerWallet": "0x1D5410d9AfFd103dD0515377DF841892AB13865b"
+  },
+  {
+      "owner": "0x8C860adb28CA8A33dB5571536BFCF7D6522181e5",
+      "endpoint": "https://discoveryprovider.audius3.prod-us-west-2.staked.cloud",
+      "spID": 6,
+      "type": "discovery-node",
+      "blockNumber": 11472691,
+      "delegateOwnerWallet": "0x734C44C93B24cd0556F92eaB7a2A9feeD95E4702"
+  },
+  {
+      "owner": "0x8C860adb28CA8A33dB5571536BFCF7D6522181e5",
+      "endpoint": "https://discoveryprovider.audius4.prod-us-west-2.staked.cloud",
+      "spID": 7,
+      "type": "discovery-node",
+      "blockNumber": 11472736,
+      "delegateOwnerWallet": "0x06D5b80e6B7a975a3F56710Ca249B4C832EeEE9c"
+  },
+  {
+      "owner": "0xc1f351FE81dFAcB3541e59177AC71Ed237BD15D0",
+      "endpoint": "https://audius-metadata-2.figment.io",
+      "spID": 8,
+      "type": "discovery-node",
+      "blockNumber": 11477614,
+      "delegateOwnerWallet": "0x4E2C78d0d3303ed459BF8a3CD87f11A6bc936140"
+  },
+  {
+      "owner": "0xA9cB9d043d4841dE83C70556FF0Bd4949C15b5Eb",
+      "endpoint": "https://audius-discovery-1.altego.net",
+      "spID": 9,
+      "type": "discovery-node",
+      "blockNumber": 11478756,
+      "delegateOwnerWallet": "0xE77C7679ED77b175F935755EEb3a421635AF07EC"
+  },
+  {
+      "owner": "0x55fc79f85eEc693A65f79DB463dc3E6831364Bce",
+      "endpoint": "https://discovery-au-01.audius.openplayer.org",
+      "spID": 10,
+      "type": "discovery-node",
+      "blockNumber": 11479044,
+      "delegateOwnerWallet": "0x3B0E70d83F7d061C4750059019CfF7C099B16f2C"
+  },
+  {
+      "owner": "0x0C3523357Fe79cC6348902A956d561be6039f462",
+      "endpoint": "https://audius-discovery.nz.modulational.com",
+      "spID": 11,
+      "type": "discovery-node",
+      "blockNumber": 11518404,
+      "delegateOwnerWallet": "0x9C0dDD449E4574c1073EDa2c97FaD97951E962df"
+  },
+  {
+      "owner": "0x8C860adb28CA8A33dB5571536BFCF7D6522181e5",
+      "endpoint": "https://discoveryprovider.audius5.prod-us-west-2.staked.cloud",
+      "spID": 14,
+      "type": "discovery-node",
+      "blockNumber": 11550848,
+      "delegateOwnerWallet": "0xfC252Bd72e7bf5D791E393d5be2f9EDD71C69A5C"
+  },
+  {
+      "owner": "0xBeD43C5eBDf61f1BCD6f3583e580806831ab2B43",
+      "endpoint": "https://audius-disco.ams-x01.nl.supercache.org",
+      "spID": 15,
+      "type": "discovery-node",
+      "blockNumber": 11568849,
+      "delegateOwnerWallet": "0x4969304A15851812f79796B3C99B6177a0C3Ac32"
+  },
+  {
+      "owner": "0x067D4f5229b453C3743023135Ecc76f8d27b9008",
+      "endpoint": "https://dn-jpn.audius.metadata.fyi",
+      "spID": 16,
+      "type": "discovery-node",
+      "blockNumber": 11569036,
+      "delegateOwnerWallet": "0xE515A7B710e7CBB55F0fB73fc56c15Ad9b36Af9B"
+  },
+  {
+      "owner": "0xe5b256d302ea2f4e04B8F3bfD8695aDe147aB68d",
+      "endpoint": "https://discoveryprovider3.audius.co",
+      "spID": 17,
+      "type": "discovery-node",
+      "blockNumber": 11694582,
+      "delegateOwnerWallet": "0xF2897993951d53a7E3eb2242D6A14D2028140DC8"
+  },
+  {
+      "owner": "0xe5b256d302ea2f4e04B8F3bfD8695aDe147aB68d",
+      "endpoint": "https://discoveryprovider2.audius.co",
+      "spID": 18,
+      "type": "discovery-node",
+      "blockNumber": 11699525,
+      "delegateOwnerWallet": "0xc97d40C0B992882646D64814151941A1c520b460"
+  },
+  {
+      "owner": "0xe5b256d302ea2f4e04B8F3bfD8695aDe147aB68d",
+      "endpoint": "https://discoveryprovider.audius.co",
+      "spID": 19,
+      "type": "discovery-node",
+      "blockNumber": 11699557,
+      "delegateOwnerWallet": "0xf1a1Bd34b2Bc73629aa69E50E3249E89A3c16786"
+  },
+  {
+      "owner": "0x8C860adb28CA8A33dB5571536BFCF7D6522181e5",
+      "endpoint": "https://discoveryprovider.audius6.prod-us-west-2.staked.cloud",
+      "spID": 21,
+      "type": "discovery-node",
+      "blockNumber": 12018002,
+      "delegateOwnerWallet": "0xB6a92ed7Da06Bea466FC12e357cF635d550DC167"
+  },
+  {
+      "owner": "0xc1f351FE81dFAcB3541e59177AC71Ed237BD15D0",
+      "endpoint": "https://audius-metadata-3.figment.io",
+      "spID": 22,
+      "type": "discovery-node",
+      "blockNumber": 12021114,
+      "delegateOwnerWallet": "0xE019F1Ad9803cfC83e11D37Da442c9Dc8D8d82a6"
+  },
+  {
+      "owner": "0xc1f351FE81dFAcB3541e59177AC71Ed237BD15D0",
+      "endpoint": "https://audius-metadata-4.figment.io",
+      "spID": 23,
+      "type": "discovery-node",
+      "blockNumber": 12021145,
+      "delegateOwnerWallet": "0xf7441A14A31199744Bf8e7b79405c5446C120D0f"
+  },
+  {
+      "owner": "0x6470Daf3bd32f5014512bCdF0D02232f5640a5BD",
+      "endpoint": "https://dn1.monophonic.digital",
+      "spID": 24,
+      "type": "discovery-node",
+      "blockNumber": 12092683,
+      "delegateOwnerWallet": "0x2CD66a3931C36596efB037b06753476dcE6B4e86"
+  },
+  {
+      "owner": "0xD79819bAf3326FAbB7ba95b098e6515a0f6408B8",
+      "endpoint": "https://discovery-b.mainnet.audius.radar.tech",
+      "spID": 26,
+      "type": "discovery-node",
+      "blockNumber": 12103308,
+      "delegateOwnerWallet": "0x93325faF9a7A0182c6bA9e1eBB7158b3a59F72a7"
+  },
+  {
+      "owner": "0xD79819bAf3326FAbB7ba95b098e6515a0f6408B8",
+      "endpoint": "https://discovery-a.mainnet.audius.radar.tech",
+      "spID": 27,
+      "type": "discovery-node",
+      "blockNumber": 12109366,
+      "delegateOwnerWallet": "0xad8108D30dFC985DAd57F690A8861dE40974286e"
+  },
+  {
+      "owner": "0xD79819bAf3326FAbB7ba95b098e6515a0f6408B8",
+      "endpoint": "https://discovery-c.mainnet.audius.radar.tech",
+      "spID": 28,
+      "type": "discovery-node",
+      "blockNumber": 12109416,
+      "delegateOwnerWallet": "0x403d9DA81E85bf768204D804bD913011eEc8e8b2"
+  },
+  {
+      "owner": "0xD79819bAf3326FAbB7ba95b098e6515a0f6408B8",
+      "endpoint": "https://discovery-d.mainnet.audius.radar.tech",
+      "spID": 29,
+      "type": "discovery-node",
+      "blockNumber": 12109434,
+      "delegateOwnerWallet": "0x4446840C6251d6B5838FB14bF3BfdE705806Daf2"
+  },
+  {
+      "owner": "0x067D4f5229b453C3743023135Ecc76f8d27b9008",
+      "endpoint": "https://dn-usa.audius.metadata.fyi",
+      "spID": 30,
+      "type": "discovery-node",
+      "blockNumber": 12117738,
+      "delegateOwnerWallet": "0x4a3D65647A8Ac41Ef7bdF13D1F171aA97a15ae4b"
+  },
+  {
+      "owner": "0x55fc79f85eEc693A65f79DB463dc3E6831364Bce",
+      "endpoint": "https://discovery-us-01.audius.openplayer.org",
+      "spID": 31,
+      "type": "discovery-node",
+      "blockNumber": 12120981,
+      "delegateOwnerWallet": "0xaC69a173aC26E2daB8663E210eD87a222Ec3945B"
+  },
+  {
+      "owner": "0x6470Daf3bd32f5014512bCdF0D02232f5640a5BD",
+      "endpoint": "https://dn2.monophonic.digital",
+      "spID": 33,
+      "type": "discovery-node",
+      "blockNumber": 12132227,
+      "delegateOwnerWallet": "0x422541273087beC833c57D3c15B9e17F919bFB1F"
+  },
+  {
+      "owner": "0x8C860adb28CA8A33dB5571536BFCF7D6522181e5",
+      "endpoint": "https://discoveryprovider.audius7.prod-us-west-2.staked.cloud",
+      "spID": 35,
+      "type": "discovery-node",
+      "blockNumber": 12426673,
+      "delegateOwnerWallet": "0xA189FAa858F6a3Fd5a05DB44C3bC2C1845161627"
+  },
+  {
+      "owner": "0x528D6Fe7dF9356C8EabEC850B0f908F53075B382",
+      "endpoint": "https://dn01.audius.endl.net",
+      "spID": 36,
+      "type": "discovery-node",
+      "blockNumber": 12691513,
+      "delegateOwnerWallet": "0x165526e7e25366fF06c4FD091E79838DF17Fa455"
+  },
+  {
+      "owner": "0xA9cB9d043d4841dE83C70556FF0Bd4949C15b5Eb",
+      "endpoint": "https://audius-discovery-2.altego.net",
+      "spID": 37,
+      "type": "discovery-node",
+      "blockNumber": 12814379,
+      "delegateOwnerWallet": "0xA9cB9d043d4841dE83C70556FF0Bd4949C15b5Eb"
+  },
+  {
+      "owner": "0x858e345E9DC681357ecd44bA285e04180c481fF6",
+      "endpoint": "https://dn1.nodeoperator.io",
+      "spID": 38,
+      "type": "discovery-node",
+      "blockNumber": 13285988,
+      "delegateOwnerWallet": "0x42D35a2f33ba468fA9eB6FFEA4b975F182957556"
+  },
+  {
+      "owner": "0xBeD43C5eBDf61f1BCD6f3583e580806831ab2B43",
+      "endpoint": "https://audius-disco.dfw-x02.us.supercache.org",
+      "spID": 39,
+      "type": "discovery-node",
+      "blockNumber": 13299056,
+      "delegateOwnerWallet": "0x4969304A15851812f79796B3C99B6177a0C3Ac32"
+  },
+  {
+      "owner": "0xA9cB9d043d4841dE83C70556FF0Bd4949C15b5Eb",
+      "endpoint": "https://audius-discovery-3.altego.net",
+      "spID": 40,
+      "type": "discovery-node",
+      "blockNumber": 13323682,
+      "delegateOwnerWallet": "0xA9cB9d043d4841dE83C70556FF0Bd4949C15b5Eb"
+  },
+  {
+      "owner": "0xb5F5280e275eCa21f167d870d054b90C9C7e6669",
+      "endpoint": "https://dn1.matterlightblooming.xyz",
+      "spID": 41,
+      "type": "discovery-node",
+      "blockNumber": 13649278,
+      "delegateOwnerWallet": "0x67154199E79bEcd2A1f34f89d6AF962CF9863945"
+  },
+  {
+      "owner": "0xf13612C7d6E31636eCC2b670d6F8a3CC50f68A48",
+      "endpoint": "https://audius-dp.singapore.creatorseed.com",
+      "spID": 42,
+      "type": "discovery-node",
+      "blockNumber": 13689323,
+      "delegateOwnerWallet": "0x01312a03a859813943Fc2521c31ad500fE86C454"
+  }
+]
