@@ -77,8 +77,7 @@ def generate_stats_json():
         f.close()
 
 
-def main():
-    generate_stats_json()
+def show_cluster_wide_stats():
     stats = parse_stats()
     for key in stats[0].keys():
         key_stats = []
@@ -86,11 +85,13 @@ def main():
             key_stats += [stat[key]]
 
         key_stats.sort()
-        print(key)
-        print()
-        print(key_stats)
-        print()
-        print()
+        print("{}\n".format(key))
+        print("{}\n\n".format(key_stats))
+
+
+def main():
+    generate_stats_json()
+    show_cluster_wide_stats()
 
 
 if __name__ == "__main__":
