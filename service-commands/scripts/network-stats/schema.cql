@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS audius.tracks (
 
   PRIMARY KEY ((track_id), update_time, blockhash, txhash)
 ) WITH CLUSTERING ORDER BY (blockhash DESC, txhash DESC)
-  AND comment = 'Table with all employee IDs.';
+  AND comment = 'Source of truth for tracks.';
 
 CREATE TABLE IF NOT EXISTS audius.tracks_by_creator (
   creator_id int,
@@ -23,28 +23,32 @@ CREATE TABLE IF NOT EXISTS audius.tracks_by_creator (
   # is_current boolean, wouldn't matter here
 
   PRIMARY KEY ((creator_id), slug)
-) WITH comment = 'Table with all employee IDs.';
+) WITH comment = 'Denormalized table for tracks by creator.';
 
 CREATE TABLE IF NOT EXISTS audius.tracks_by_play (
   date date,
   track_id int,
 
+  block_id int,
   play_time timeuuid,
 
-  PRIMARY KEY ((date, track_id), play_time)
+  PRIMARY KEY ((date, track_id), block_id, play_time)
 ) WITH CLUSTERING ORDER BY (play_time DESC)
   AND default_time_to_live = 2592000
-  AND comment = 'Table with all employee IDs.';
+  AND compaction = {'compaction_window_size': '1',
+                    'compaction_window_unit': 'MINUTES',
+                    'class': 'org.apache.cassandra.db.compaction.TimeWindowCompactionStrategy'}
+  AND comment = 'Source of truth for track plays.';
 
 CREATE TABLE IF NOT EXISTS audius.plays_ts (
-  date date,
-  hour int,
-  minute int,
-  mod_seconds int,
+  block_id int,
 
   track_id int,
 
-  PRIMARY KEY ((date, hour, minute, mod_seconds), track_id)
+  PRIMARY KEY ((block_id), track_id)
 ) WITH default_time_to_live = 2592000
-  AND comment = 'Table with all employee IDs.';
+  AND compaction = {'compaction_window_size': '1',
+                    'compaction_window_unit': 'MINUTES',
+                    'class': 'org.apache.cassandra.db.compaction.TimeWindowCompactionStrategy'}
+  AND comment = 'Ledger for which plays need to be recomputed.';
 

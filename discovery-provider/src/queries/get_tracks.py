@@ -95,15 +95,15 @@ def _get_tracks(session, args):
 
     # Allow filtering of deletes
     if "filter_deleted" in args:
-        # tracks_deleted denormalized table?
-        # post-response makes more sense
+        # tracks_deleted denormalized table not needed
+        # post-response makes more sense to show artist their deleted songs
         filter_deleted = args.get("filter_deleted")
         if filter_deleted:
             base_query = base_query.filter(Track.is_delete == False)
 
     if "min_block_number" in args:
-        # tracks_by_block_number denormalized table?
-        # post-response makes more sense
+        # tracks_by_block_number denormalized table may be required
+        # this is used when we know a song was uploaded, but we don't yet have the slug/track_id
         min_block_number = args.get("min_block_number")
         base_query = base_query.filter(Track.blocknumber >= min_block_number)
 
