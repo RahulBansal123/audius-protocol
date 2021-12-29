@@ -42,23 +42,14 @@ class GetTrackArgs(TypedDict):
 def _get_tracks(session, args):
     # Create initial query
     base_query = session.query(Track)
+    # only one is_current is allowed
     base_query = base_query.filter(Track.is_current == True, Track.stem_of == None)
 
+    results = []
     if "routes" in args:
         routes = args.get("routes")
-        # Join the routes table
-        base_query = base_query.join(TrackRoute, TrackRoute.track_id == Track.track_id)
-
-        # Add the query conditions for each route
-        filter_cond = []
-        for route in routes:
-            filter_cond.append(
-                and_(
-                    TrackRoute.slug == route["slug"],
-                    TrackRoute.owner_id == route["owner_id"],
-                )
-            )
-        base_query = base_query.filter(or_(*filter_cond))
+        # remove this join via denormalization
+        results = cass.get_tracks_by_owner(routes["owner_id"], routes["slug"]).result()
     else:
         # Only return unlisted tracks if either
         # - above case, routes are present (direct links to hidden tracks)
@@ -68,11 +59,13 @@ def _get_tracks(session, args):
             and "authed_user_id" in args
             and args.get("user_id") == args.get("authed_user_id")
         )
+        # perform post results
         if not is_authed_user:
             base_query = base_query.filter(Track.is_unlisted == False)
 
     # Conditionally process an array of tracks
     if "id" in args:
+        # tracks_by_id denormalized table
         track_id_list = args.get("id")
         try:
             # Update query with track_id list
@@ -81,23 +74,43 @@ def _get_tracks(session, args):
             logger.error("Invalid value found in track id list", exc_info=True)
             raise e
 
+        futures = []
+        track_id_list = args.get("id")
+        for track_id in track_id_list:
+            futures.append(cass.get_track_by_id(track_id))
+
+        results = []
+        for future in futures:
+            results.append(future.result())
+
+
     # Allow filtering of tracks by a certain creator
     if "user_id" in args:
+        # tracks_by_creator denormalized table
         user_id = args.get("user_id")
-        base_query = base_query.filter(Track.owner_id == user_id)
+        results = cass.get_tracks_by_creator(user_id).result()
+
+    ## Post Response Below
+    ## Perform 1 pass of filtering, etc and 1 of sorting
 
     # Allow filtering of deletes
     if "filter_deleted" in args:
+        # tracks_deleted denormalized table?
+        # post-response makes more sense
         filter_deleted = args.get("filter_deleted")
         if filter_deleted:
             base_query = base_query.filter(Track.is_delete == False)
 
     if "min_block_number" in args:
+        # tracks_by_block_number denormalized table?
+        # post-response makes more sense
         min_block_number = args.get("min_block_number")
         base_query = base_query.filter(Track.blocknumber >= min_block_number)
 
     if "sort" in args:
         if args["sort"] == "date":
+            # sort is done post return with the created_at column
+            # if using Cassandra, two clustering keys might be possible for certain tables like artist
             base_query = base_query.order_by(
                 coalesce(
                     # This func is defined in alembic migrations
@@ -107,6 +120,9 @@ def _get_tracks(session, args):
                 Track.track_id.desc(),
             )
         elif args["sort"] == "plays":
+            # cron job to count tracks_by_play and write to tracks
+            # job requires scraping plays_ts to see which songs need to be counted + updated
+            # sort is done post return with the tracks
             base_query = base_query.join(
                 AggregatePlays, AggregatePlays.play_item_id == Track.track_id
             ).order_by(AggregatePlays.count.desc())
