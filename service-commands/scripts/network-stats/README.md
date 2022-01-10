@@ -28,3 +28,28 @@ For tracks, [`TrackRoute`](https://github.com/AudiusProject/audius-protocol/blob
 
 When a request is submitted, [pagination](https://github.com/AudiusProject/audius-protocol/blob/025f2f35e270335baf320de9d1bee82c37408ffe/discovery-provider/src/queries/query_helpers.py#L996) may occur before the data is [remapped to a `list` of `dicts`](https://github.com/AudiusProject/audius-protocol/blob/025f2f35e270335baf320de9d1bee82c37408ffe/discovery-provider/src/utils/helpers.py#L140).
 
+## Cassandra
+
+After thinking about it more, Cassandra may be the best solution to match all the stated goals. I realized that since each node scans the same blockchain, Cassandra's optimized replication isn't important, only redundancy as a way to bootstrap new nodes into the cluster and thereby horizontally scale. We also won't need strong consistency through replication either since each node is scanning the blockchain, thereby leaving only the failure detector to be worked on for client-side requests.
+
+We can make the Cassandra cluster work when it comes to:
+
+*  security, via SSH tunnels
+*  horizontal linear scale, via Cassandra
+*  freeing up resources, via removing joins
+*  bootstrap/decommission processes, via Cassandra
+*  redundancy, via Cassandra
+*  immediate consistency, since each node scans its own data
+*  clusterwide consistency, for certain critical data like max_blockheight
+
+We would need to:
+
+* Create new ConsistencyLevels.
+* Tune the failure detector.
+* Run seperate clusters, never interlinked data centers, to protect from the lack of immutability introduced by data corruption and/or bad actors who have gained access to any system in a cluster.
+* Setup metrics/alerting, like Wikipedia.
+* Monitor and remove unhealthy nodes.
+* Update configs remotely.
+* Setup Reaper for consistency alerting, not primarily repairs.
+* Denormalize our read patterns.
+* Setup map/reduce jobs on denormalized data.
