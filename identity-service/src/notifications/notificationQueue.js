@@ -116,7 +116,7 @@ async function drainPublishedSolanaMessages (logger) {
 }
 
 async function drainPublishedAnnouncements (logger) {
-  logger.info(`[notificationQueue:drainPublishedAnnouncements] Beginning processing of ${pushNotificationQueue.PUSH_SOLANA_NOTIFICATIONS_BUFFER.length} notifications...`)
+  logger.info(`[notificationQueue:drainPublishedAnnouncements] Beginning processing of ${pushNotificationQueue.PUSH_ANNOUNCEMENTS_BUFFER.length} notifications...`)
 
   let numProcessedNotifs = 0
   for (let bufferObj of pushNotificationQueue.PUSH_ANNOUNCEMENTS_BUFFER) {
